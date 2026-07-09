@@ -26,7 +26,8 @@
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            model: "openai/gpt-oss-120b",
+            /*model: "openai/gpt-oss-120b",*/
+            model: "deepseek-ai/deepseek-v4-pro", 
             messages: [{ role: "user", content: userPrompt }],
             max_tokens: 5000
           })
