@@ -11,6 +11,7 @@
   <button onclick="askAI()">Send</button>
   <pre id="response"></pre>
 
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
     async function askAI() {
       const userPrompt = document.getElementById("prompt").value;
@@ -36,7 +37,8 @@
         }
 
         const data = await response.json();
-        responseBox.innerText = data.choices[0].message.content;
+        const output = data.choices[0].message.content;
+        responseBox.innerText = marked.parse(output);
 
       } catch (error) {
         responseBox.innerText = "❌ Error: " + error.message;
