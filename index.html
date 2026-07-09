@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Personal AI Assistant </title>
+</head>
+<body>
+  <h2>Ask AI</h2>
+  <input id="prompt" type="text" placeholder="Enter your prompt" style="width:300px;">
+  <button onclick="askAI()">Send</button>
+  <pre id="response"></pre>
+
+  <script>
+    async function askAI() {
+      const userPrompt = document.getElementById("prompt").value;
+
+      const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Authorization": "Bearer gsk_your_api_key_here", 
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          model: "openai/gpt-oss-120b",
+          messages: [{ role: "user", content: userPrompt }],
+          max_tokens: 10000
+        })
+      });
+
+      const data = await response.json();
+      document.getElementById("response").innerText =
+        data.choices[0].message.content;
+    }
+  </script>
+</body>
+</html>
