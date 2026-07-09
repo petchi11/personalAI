@@ -28,7 +28,7 @@
           body: JSON.stringify({
             model: "openai/gpt-oss-120b",
             messages: [{ role: "user", content: userPrompt }],
-            max_tokens: 5000
+            max_tokens: 10000
           })
         });
 
@@ -38,7 +38,7 @@
 
         const data = await response.json();
         const output = data.choices[0].message.content;
-        responseBox.innerText = marked.parse(output);
+        responseBox.innerHTML = marked.parse(output);
 
       } catch (error) {
         responseBox.innerText = "❌ Error: " + error.message;
